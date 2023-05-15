@@ -1,5 +1,7 @@
 package com.review.coffeeShop.member.service;
 
+import com.review.coffeeShop.exception.BusinessLogicException;
+import com.review.coffeeShop.exception.ExceptionCode;
 import com.review.coffeeShop.member.entity.Member;
 import com.review.coffeeShop.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class MemberService {
         return response;
     }
 
-    public Member updateMember(long memberId){
+    public Member updateMember(Member member){
 
         return null;
     }
@@ -30,7 +32,7 @@ public class MemberService {
     public Member findMember(long memberId){
 
         Optional<Member> member = memberRepository.findById(memberId);
-        Member response = member.orElseThrow(()-> new RuntimeException());
+        Member response = member.orElseThrow(()-> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
 
         return response;
     }
